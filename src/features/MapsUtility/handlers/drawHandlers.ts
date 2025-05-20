@@ -1,9 +1,3 @@
-import type { MapHandlerType } from "../types"
-
-interface DrawResponseType {
-    event: any
-    draws: any
-}
 
 export const drawHandlers = {
     onCreate: (event: any, draws: any) => {

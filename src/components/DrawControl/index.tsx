@@ -3,17 +3,17 @@ import { useMemo, useRef } from "react";
 
 import { useControl } from "@vis.gl/react-maplibre";
 import { BsSlashLg } from "react-icons/bs";
-import { FaRegCircle } from "react-icons/fa6";
+// import { FaRegCircle } from "react-icons/fa6";
 import { GrClear } from "react-icons/gr";
 import { IoTrashOutline } from "react-icons/io5";
 import { TbPolygon } from "react-icons/tb";
 
-import {
-    CircleMode,
-    DirectMode,
-    DragCircleMode,
-    SimpleSelectMode,
-} from "maplibre-gl-draw-circle";
+// import {
+//     CircleMode,
+//     DirectMode,
+//     DragCircleMode,
+//     SimpleSelectMode,
+// } from "maplibre-gl-draw-circle";
 import DrawTools from "./components/DrawTool";
 
 const DrawControl = (props: any) => {
@@ -22,15 +22,24 @@ const DrawControl = (props: any) => {
 
   useControl(
     ({ map }) => {
-      const draw = new MapboxDraw({
+      const draw = new MapboxDraw({ 
         userProperties: false,
-        displayControlsDefault: false,
+        displayControlsDefault: true,
+        controls: {
+          point: false,
+          line_string: false,
+          polygon: false,
+          trash: false,
+          combine_features: false,
+          uncombine_features: false,
+        },
+        
         modes: {
           ...MapboxDraw.modes,
-          draw_circle: CircleMode,
-          drag_circle: DragCircleMode,
-          direct_select: DirectMode,
-          simple_select: SimpleSelectMode,
+          // draw_circle: CircleMode,
+          // drag_circle: DragCircleMode,
+          // direct_select: DirectMode,
+          // simple_select: SimpleSelectMode,
         },
         styles: [
           {
@@ -206,7 +215,7 @@ const DrawControl = (props: any) => {
 
       if (drawRef) drawRef.current = draw;
 
-      return draw;
+      return draw as any;
     },
 
     ({ map }) => {
@@ -219,15 +228,15 @@ const DrawControl = (props: any) => {
   );
 
   const tools = [
-    {
-      title: "Circle",
-      icon: <FaRegCircle size={20} />,
-      onClick: () => {
-        drawRef.current?.changeMode("draw_circle", {
-          initialRadiusInKm: 1,
-        });
-      },
-    },
+    // {
+    //   title: "Circle",
+    //   icon: <FaRegCircle size={20} />,
+    //   onClick: () => {
+    //     drawRef.current?.changeMode("draw_circle", {
+    //       initialRadiusInKm: 1,
+    //     });
+    //   },
+    // },
     {
       title: "Polygon",
       icon: <TbPolygon size={20} />,
@@ -240,7 +249,6 @@ const DrawControl = (props: any) => {
       icon: <BsSlashLg size={20} />,
       onClick: () => {
         drawRef.current?.changeMode("draw_line_string");
-        props?.setCursor("crosshair")
       },
     },
     {

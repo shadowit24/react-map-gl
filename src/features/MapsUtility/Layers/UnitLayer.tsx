@@ -1,5 +1,5 @@
 import { Layer, Source } from "@vis.gl/react-maplibre";
-import React, { memo } from "react";
+import { memo } from "react";
 import type { GeoJSONFeatureCollection } from "../../../store/containers/mapsStore";
 
 type UnitType = {

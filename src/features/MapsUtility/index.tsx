@@ -1,4 +1,4 @@
-import Map, { AttributionControl, GeolocateControl, MapProvider, NavigationControl, ScaleControl } from "@vis.gl/react-maplibre";
+import Map, { GeolocateControl, MapProvider, NavigationControl, ScaleControl } from "@vis.gl/react-maplibre";
 import maplibregl, { type MapLayerMouseEvent } from "maplibre-gl";
 import React, { useCallback, useRef } from 'react';
 import DrawControl from "../../components/DrawControl";
@@ -6,30 +6,28 @@ import { useMapsStore } from "../../store";
 import { drawHandlers } from "./handlers/drawHandlers";
 import { mapHandlers } from "./handlers/mapHandlers";
 
-type Props = {}
 
-const MapsUtility:React.FC = (props: Props) => {
-  const { layer, setLayer } = useMapsStore()
+
+const MapsUtility:React.FC = () => {
+  const { layer } = useMapsStore()
   const mapRef = useRef<any>(null)
   
   const  onLoad = useCallback(()=> {
     if(!mapRef) return;
 
-    let mapCtn = mapRef?.current?.getMap()
+    
 
     mapHandlers.onLoad({
       ref: mapRef,
     })
 
-    //
-
+    
     
   },[layer?.style, ])
 
   const  onClick = useCallback((event: MapLayerMouseEvent)=> {
     if(!mapRef) return;
-    const { lngLat, point } = event;
-    const features = mapRef?.current?.queryRenderedFeatures(point);
+     console.log(event)
 
     // mapHandlers.onClick({
     //   ref: mapRef,
@@ -44,6 +42,8 @@ const MapsUtility:React.FC = (props: Props) => {
   const  onMouseMove = useCallback((event: MapLayerMouseEvent)=> {
     if(!mapRef) return;
 
+    console.log(event)
+
     // mapHandlers.onMouseMove({
     //   ref: mapRef,
     //   current: [],
@@ -54,7 +54,7 @@ const MapsUtility:React.FC = (props: Props) => {
 
   const  onMouseLeave = useCallback((event: MapLayerMouseEvent)=> {
     if(!mapRef) return;
-
+  console.log(event)
   //  mapHandlers.onMouseLeave({
   //     ref: mapRef,
   //     current: [],
@@ -64,17 +64,17 @@ const MapsUtility:React.FC = (props: Props) => {
   },[mapRef])
 
 
-  const onMove = useCallback((e: any)=> {
+  const onMove = useCallback(()=> {
     
   },[])
 
   const onMouseUp = useCallback((e: any)=> {
-   console.log("onMouseUp")
+   console.log("onMouseUp", e)
   },[])
 
 
 
-  const onMouseDown = useCallback((e: any)=> {
+  const onMouseDown = useCallback(()=> {
 
     console.log("onMouseDown")
     

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { useState } from "react";
 import { MdClear, MdOutlineDraw } from "react-icons/md";
 import "./index.scss";
 
